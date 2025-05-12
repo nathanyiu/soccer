@@ -1,6 +1,8 @@
 void playerBallCollision(float px, float py) {
- if (dist(px,py,ballx,bally) <= 40){
-   ballvx = (px - ballx) * 0.1; 
-   ballvy = (py - bally) * 0.1;
+ if (dist(px,py,ballx,bally) <= 38){
+   ballvx = (px - ballx); 
+   ballvy = (py - bally);
+   intBallvx = ballvx;
+   intBallvy = ballvy;
  }
 }
