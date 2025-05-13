@@ -22,6 +22,8 @@ float intBallx, intBally, ballDist;
 float intBallvx, intBallvy;
 int scoreA, scoreB;
 int top, topL, BottomL, Bottom, BottomR, TopR, Mid;
+int pauseBack, i;
+boolean pause;
 void setup() {
   size(1200, 880);
   player1x = width/4;
@@ -46,25 +48,33 @@ void setup() {
   Game = 2;
   GG = 3;
   Pause = 4;
-  Mode = Intro;
+  Mode = Pause;
   scoreA = 0;
   scoreB = 0;
+  pauseBack = 1;
+  i = 0;
 }
 void draw() {
   if (Mode == Intro) {
     Intro();
   }
-  if (Mode == Controls) {
+  else if (Mode == Controls) {
     Controls();
   }
-  if (Mode == Game) {
+  else if (Mode == Game) {
     Game();
   }
-  if (Mode == GG) {
+  else if (Mode == GG) {
     GG();
   }
   if (Mode == Pause) {
+    pause = true;
     Pause();
+  } else {
+    pause = false; 
+  }
+  if (pause == false) {
+    i = 0; 
   }
   println(Mode);
 }
@@ -161,6 +171,12 @@ void keyPressed() {
   if (key == 't') {
     scoreB++;
   }
+  if (keyCode == TAB && pause == false) {
+    Mode = Pause; 
+  }
+  else if (keyCode == TAB && pause == true) {
+    Mode = Game; 
+  }
 }
 void keyReleased() {
   if (key == 'w') {
@@ -188,28 +204,50 @@ void keyReleased() {
     rightkey = false;
   }
 }
-void mouseClicked() {
-  if (mouseX > 400 && mouseX < 800 && mouseY > 300 && mouseY < 425 && Mode == Intro) {
+void mouseReleased(){
+  if (Mode == Intro) {
+    IntroClicked();
+  }
+  else if (Mode == Controls) {
+    ControlsClicked();
+  }
+  else if (Mode == Game) {
+    GameClicked();
+  }
+  else if (Mode == GG) {
+    GGClicked();
+  }
+  else if (Mode == Pause) {
+    PauseClicked();
+  }
+}
+void IntroClicked() {
+   if (mouseX > 400 && mouseX < 800 && mouseY > 300 && mouseY < 425) {
     Mode = Game;
   }
-  if (mouseX > 400 && mouseX < 800 && mouseY > 450 && mouseY < 575 && Mode == Intro) {
+  if (mouseX > 400 && mouseX < 800 && mouseY > 450 && mouseY < 575) {
     Mode = Controls;
   }
-  if (dist(mouseX, mouseY, 50, 50)<25 && Mode == Game) {
-    Mode = Intro;
-  }
-  if (dist(mouseX, mouseY, 110, 50)< 25 && Mode == Pause) {
-    Mode = Game;
-  } 
-  if (dist(mouseX, mouseY, 110, 50)< 25 && Mode == Game) {
+}
+void ControlsClicked() {
+   
+}
+void GameClicked() {
+  if (dist(mouseX, mouseY, 110, 50)< 25) {
     Mode = Pause;
   } 
+  if (dist(mouseX, mouseY, 50, 50)<25) {
+    Mode = Intro;
+  }
+}
+void GGClicked() {
   
 }
-void mouseReleased(){
-
-}
-void mousePressed() {
-
-
+void PauseClicked() {
+  if (dist(mouseX, mouseY, 110, 50)< 25) {
+    Mode = Game;
+  } 
+  if (dist(mouseX, mouseY, 50, 50)<25) {
+    Mode = Intro;
+  }
 }
