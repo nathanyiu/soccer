@@ -23,7 +23,9 @@ float intBallvx, intBallvy;
 int scoreA, scoreB;
 int top, topL, BottomL, Bottom, BottomR, TopR, Mid;
 int pauseBack, i;
-boolean pause;
+boolean pause,introBack;
+PImage soccer;
+float backballx, backbally, rotate;
 void setup() {
   size(1200, 880);
   player1x = width/4;
@@ -48,14 +50,19 @@ void setup() {
   Game = 2;
   GG = 3;
   Pause = 4;
-  Mode = Pause;
+  Mode = Intro;
   scoreA = 0;
   scoreB = 0;
   pauseBack = 1;
   i = 0;
+  soccer = loadImage("soccer2.png");
+  backballx = 450;
+  backbally = -100;
+  rotate = 20;
 }
 void draw() {
   if (Mode == Intro) {
+    introBack();
     Intro();
   }
   else if (Mode == Controls) {
@@ -135,34 +142,34 @@ void ball(float ballx, float bally) {
   popMatrix();
 }
 void keyPressed() {
-  if (key == 'w') {
+  if (key == 'w' || key == 'W') {
     wkey = true;
   }
-  if (key == 'a') {
+  if (key == 'a' || key == 'A') {
     akey = true;
   }
-  if (key == 's') {
+  if (key == 's' || key == 'S') {
     skey = true;
   }
-  if (key == 'd') {
+  if (key == 'd' || key == 'D') {
     dkey = true;
   }
-  if (key == 'u') {
+  if (key == 'u' || key == 'U') {
     upkey = true;
   }
-  if (key == 'h') {
+  if (key == 'h' || key == 'H') {
     leftkey = true;
   }
-  if (key == 'j') {
+  if (key == 'j' || key == 'J') {
     downkey = true;
   }
-  if (key == 'k') {
+  if (key == 'k' || key == 'K') {
     rightkey = true;
   }
-  if (key == 'e') {
+  if (key == 'e' || key == 'E') {
     player1B *= -1;
   }
-  if (key == 'i') {
+  if (key == 'i' || key == 'I') {
     player2B *= -1;
   }
   if (key == 'g') {
@@ -171,36 +178,36 @@ void keyPressed() {
   if (key == 't') {
     scoreB++;
   }
-  if (keyCode == TAB && pause == false) {
+  if (keyCode == TAB && pause == false && Mode == Game) {
     Mode = Pause; 
   }
-  else if (keyCode == TAB && pause == true) {
+  else if (keyCode == TAB && pause == true && Mode == Pause) {
     Mode = Game; 
   }
 }
 void keyReleased() {
-  if (key == 'w') {
+  if (key == 'w' || key == 'W') {
     wkey = false;
   }
-  if (key == 'a') {
+  if (key == 'a' || key == 'A') {
     akey = false;
   }
-  if (key == 's') {
+  if (key == 's' || key == 'S') {
     skey = false;
   }
-  if (key == 'd') {
+  if (key == 'd' || key == 'D') {
     dkey = false;
   }
-  if (key == 'u') {
+  if (key == 'u' || key == 'U') {
     upkey = false;
   }
-  if (key == 'h') {
+  if (key == 'h' || key == 'H') {
     leftkey = false;
   }
-  if (key == 'j') {
+  if (key == 'j' || key == 'J') {
     downkey = false;
   }
-  if (key == 'k') {
+  if (key == 'k' || key == 'K') {
     rightkey = false;
   }
 }
@@ -222,12 +229,12 @@ void mouseReleased(){
   }
 }
 void IntroClicked() {
-   if (mouseX > 400 && mouseX < 800 && mouseY > 300 && mouseY < 425) {
-    Mode = Game;
-  }
-  if (mouseX > 400 && mouseX < 800 && mouseY > 450 && mouseY < 575) {
-    Mode = Controls;
-  }
+  // if (mouseX > 400 && mouseX < 800 && mouseY > 300 && mouseY < 425) {
+  //  Mode = Game;
+  //}
+  //if (mouseX > 400 && mouseX < 800 && mouseY > 450 && mouseY < 575) {
+  //  Mode = Controls;
+  //}
 }
 void ControlsClicked() {
    
@@ -244,10 +251,10 @@ void GGClicked() {
   
 }
 void PauseClicked() {
-  if (dist(mouseX, mouseY, 110, 50)< 25) {
+  if (dist(mouseX, mouseY, 600, 700)< 100) {
     Mode = Game;
   } 
-  if (dist(mouseX, mouseY, 50, 50)<25) {
+  if (dist(mouseX, mouseY, 300, 700)<62.5) {
     Mode = Intro;
   }
 }
