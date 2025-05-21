@@ -1,6 +1,6 @@
 void ballMovement() {
-  ballx -= ballvx;
-  bally -= ballvy;
+  ballx -= ballvx * ballSpeed;
+  bally -= ballvy * ballSpeed;
   //if (bally <= 214.5 || bally >=894.5) {
   //  ballvy *= -1;
   //}

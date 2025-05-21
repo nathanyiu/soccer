@@ -17,15 +17,21 @@ boolean OneBTouch2BTop, OneBTouch2BLeft, OneBTouch2BDown, OneBTouch2BRight;
 boolean OneBTouch2Top, OneBTouch2Left, OneBTouch2Down, OneBTouch2Right;
 boolean TwoTouch2BTop, TwoTouch2BLeft, TwoTouch2BDown, TwoTouch2BRight;
 float player1B, player2B;
-int Mode, Intro, Controls, Game, Pause, GG;
+int Mode, Intro, Controls, Game, Pause, GG, modeSelect;
 float intBallx, intBally, ballDist;
 float intBallvx, intBallvy;
 int scoreA, scoreB;
 int top, topL, BottomL, Bottom, BottomR, TopR, Mid;
 int pauseBack, i;
-boolean pause,introBack;
+boolean pause, introBack;
 PImage soccer;
 float backballx, backbally, rotate;
+PFont start, mode;
+int gameMode; //83
+float line1, line2, line3, line4;
+float moveCircle,ballCircle;
+int maxScore;
+float ballSpeed;
 void setup() {
   size(1200, 880);
   player1x = width/4;
@@ -50,7 +56,8 @@ void setup() {
   Game = 2;
   GG = 3;
   Pause = 4;
-  Mode = Intro;
+  modeSelect = 5;
+  Mode = modeSelect;
   scoreA = 0;
   scoreB = 0;
   pauseBack = 1;
@@ -59,29 +66,39 @@ void setup() {
   backballx = 450;
   backbally = -100;
   rotate = 20;
+  start = createFont("Calibri-Bold-48", 30);
+  mode = createFont("Calibri-Bold-48", 50);
+  gameMode = 0;
+  line1 = 315;
+  line2 = 325;
+  line3 = 315;
+  line4 = 325;
+  moveCircle = 600;
+  ballCircle = 600;
+  maxScore = 2;
+  ballSpeed = 1;
 }
 void draw() {
   if (Mode == Intro) {
     introBack();
     Intro();
-  }
-  else if (Mode == Controls) {
+  } else if (Mode == Controls) {
     Controls();
-  }
-  else if (Mode == Game) {
+  } else if (Mode == Game) {
     Game();
-  }
-  else if (Mode == GG) {
+  } else if (Mode == GG) {
     GG();
+  } else if (Mode == modeSelect) {
+    modeSelect();
   }
   if (Mode == Pause) {
     pause = true;
     Pause();
   } else {
-    pause = false; 
+    pause = false;
   }
   if (pause == false) {
-    i = 0; 
+    i = 0;
   }
   println(Mode);
 }
@@ -179,10 +196,11 @@ void keyPressed() {
     scoreB++;
   }
   if (keyCode == TAB && pause == false && Mode == Game) {
-    Mode = Pause; 
-  }
-  else if (keyCode == TAB && pause == true && Mode == Pause) {
-    Mode = Game; 
+    Mode = Pause;
+  } else if (keyCode == TAB && pause == true && Mode == Pause) {
+    Mode = Game;
+  } else if (key == ' ' && Mode == Intro) {
+    Mode = modeSelect;
   }
 }
 void keyReleased() {
@@ -211,50 +229,92 @@ void keyReleased() {
     rightkey = false;
   }
 }
-void mouseReleased(){
+void mouseReleased() {
   if (Mode == Intro) {
     IntroClicked();
-  }
-  else if (Mode == Controls) {
+  } else if (Mode == Controls) {
     ControlsClicked();
-  }
-  else if (Mode == Game) {
+  } else if (Mode == Game) {
     GameClicked();
-  }
-  else if (Mode == GG) {
+  } else if (Mode == GG) {
     GGClicked();
-  }
-  else if (Mode == Pause) {
+  } else if (Mode == Pause) {
     PauseClicked();
+  } else if (Mode == modeSelect) {
+    modeSelectClicked();
+  }
+}
+void mouseDragged() {
+  if (mouseX > 495 && mouseX < 705 && mouseY > 540 && mouseY < 560 && Mode == modeSelect) {
+    moveCircle = mouseX;
+  }
+  if (mouseX > 495 && mouseX < 705 && mouseY > 630 && mouseY < 650 && Mode == modeSelect) {
+    ballCircle = mouseX;
   }
 }
 void IntroClicked() {
-  // if (mouseX > 400 && mouseX < 800 && mouseY > 300 && mouseY < 425) {
-  //  Mode = Game;
-  //}
-  //if (mouseX > 400 && mouseX < 800 && mouseY > 450 && mouseY < 575) {
-  //  Mode = Controls;
-  //}
 }
 void ControlsClicked() {
-   
 }
 void GameClicked() {
   if (dist(mouseX, mouseY, 110, 50)< 25) {
     Mode = Pause;
-  } 
+  }
   if (dist(mouseX, mouseY, 50, 50)<25) {
     Mode = Intro;
   }
 }
 void GGClicked() {
-  
 }
 void PauseClicked() {
   if (dist(mouseX, mouseY, 600, 700)< 100) {
     Mode = Game;
-  } 
+  }
   if (dist(mouseX, mouseY, 300, 700)<62.5) {
     Mode = Intro;
+  }
+}
+void modeSelectClicked() {
+  if (mouseX > 200 && mouseX < 500 && mouseY > 160 && mouseY < 390) {
+    gameMode = 1;
+  }
+  if (mouseX > 700 && mouseX < 900 && mouseY > 160 && mouseY < 390) {
+    gameMode = 2;
+  }
+  if (mouseX > 495 && mouseX < 705 && mouseY > 540 && mouseY < 560) {
+    moveCircle = mouseX;
+  }
+  if (mouseX > 435 && mouseX < 475 && mouseY > 530 && mouseY < 570) {
+    if (moveCircle <= 500) {
+      moveCircle-= 0;
+    } else {
+      moveCircle -= 25;
+    }
+  }
+  if (mouseX > 725 && mouseX < 765 && mouseY > 530 && mouseY < 570) {
+    if (moveCircle >= 705) {
+      moveCircle += 0;
+    } else {
+      moveCircle += 25;
+    }
+  }
+  
+  
+  if (mouseX > 495 && mouseX < 705 && mouseY > 630 && mouseY < 650) {
+    ballCircle = mouseX;
+  }
+  if (mouseX > 435 && mouseX < 475 && mouseY > 620 && mouseY < 660) {
+    if (ballCircle <= 500) {
+      ballCircle-= 0;
+    } else {
+      ballCircle -= 25;
+    }
+  }
+  if (mouseX > 725 && mouseX < 765 && mouseY > 620 && mouseY < 660) {
+    if (ballCircle >= 705) {
+      ballCircle += 0;
+    } else {
+      ballCircle += 25;
+    }
   }
 }

@@ -6,10 +6,10 @@ void introBack() {
   image(soccer, -100, -100, 200, 200);
   backballx = backballx - 1;
   backbally = backbally + 1;
-  rotate = rotate + 0.01;
+  rotate = rotate + 0.02;
   popMatrix();
   if (backballx <= -100) {
-    backballx = random(200,1100); 
+    backballx = random(200,1200); 
     backbally = -100;
   }
 }
