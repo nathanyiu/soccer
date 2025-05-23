@@ -1,6 +1,6 @@
 void ballMovement() {
-  ballx -= ballvx * ballSpeed;
-  bally -= ballvy * ballSpeed;
+  ballx -= ballvx;
+  bally -= ballvy;
   //if (bally <= 214.5 || bally >=894.5) {
   //  ballvy *= -1;
   //}
@@ -64,8 +64,9 @@ void ballMovement() {
     ballvy = 0;
     scoreA++;
   }
-  ballvx = ballvx * 0.8;
-  ballvy = ballvy * 0.8;
+  //bsReduce = map(ballSpeed,0.1,1,0.9,0.8);
+  ballvx = ballvx * bsReduce;
+  ballvy = ballvy * bsReduce;
 
   if (bally <= 214.5 || bally >=894.5) {
     ballvy=ballvy*-1;

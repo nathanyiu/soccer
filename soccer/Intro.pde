@@ -20,10 +20,10 @@ void Intro() {
   pressSpace();
 }
 void pressSpace() {
-  //textFont(start);
   stroke(2);
   fill(255);
-  text("Press Space to Start", 450, 800,30);
+  textSize(30);
+  text("Press Space to Start", 475, 800);
 }
 void title(int a) {
   noStroke();

@@ -29,9 +29,11 @@ float backballx, backbally, rotate;
 PFont start, mode;
 int gameMode; //83
 float line1, line2, line3, line4;
-float moveCircle,ballCircle;
+float moveCircle, ballCircle;
 int maxScore;
-float ballSpeed;
+float ballSpeed, bsReduce;
+int bs;
+String inf;
 void setup() {
   size(1200, 880);
   player1x = width/4;
@@ -66,8 +68,8 @@ void setup() {
   backballx = 450;
   backbally = -100;
   rotate = 20;
-  start = createFont("Calibri-Bold-48", 30);
-  mode = createFont("Calibri-Bold-48", 50);
+  //start = createFont("Calibri-Bold-48", 30);
+  //mode = createFont("Calibri-Bold-48", 50);
   gameMode = 0;
   line1 = 315;
   line2 = 325;
@@ -75,10 +77,15 @@ void setup() {
   line4 = 325;
   moveCircle = 600;
   ballCircle = 600;
-  maxScore = 2;
+  maxScore = 3;
   ballSpeed = 1;
+  bsReduce = 0.9;
+  inf = "\u221E";
+  //ballSpeed = 1;
+  //bsReduce = 0.8;
 }
 void draw() {
+  background(58, 201, 57);
   if (Mode == Intro) {
     introBack();
     Intro();
@@ -248,9 +255,9 @@ void mouseDragged() {
   if (mouseX > 495 && mouseX < 705 && mouseY > 540 && mouseY < 560 && Mode == modeSelect) {
     moveCircle = mouseX;
   }
-  if (mouseX > 495 && mouseX < 705 && mouseY > 630 && mouseY < 650 && Mode == modeSelect) {
-    ballCircle = mouseX;
-  }
+  //if (mouseX > 495 && mouseX < 705 && mouseY > 630 && mouseY < 650 && Mode == modeSelect) {
+  //  ballCircle = mouseX;
+  //}
 }
 void IntroClicked() {
 }
@@ -298,23 +305,35 @@ void modeSelectClicked() {
       moveCircle += 25;
     }
   }
-  
-  
-  if (mouseX > 495 && mouseX < 705 && mouseY > 630 && mouseY < 650) {
-    ballCircle = mouseX;
+  if (mouseX > 429.5 && mouseX < 498 && mouseY > 615 && mouseY < 673) {
+    ballSpeed = 0.5;
   }
-  if (mouseX > 435 && mouseX < 475 && mouseY > 620 && mouseY < 660) {
-    if (ballCircle <= 500) {
-      ballCircle-= 0;
-    } else {
-      ballCircle -= 25;
-    }
+  if (mouseX > 498 && mouseX < 568 && mouseY > 615 && mouseY < 673) {
+    ballSpeed = 1;
   }
-  if (mouseX > 725 && mouseX < 765 && mouseY > 620 && mouseY < 660) {
-    if (ballCircle >= 705) {
-      ballCircle += 0;
-    } else {
-      ballCircle += 25;
-    }
+  if (mouseX > 568 && mouseX < 642 && mouseY > 615 && mouseY < 673) {
+    ballSpeed = 1.5;
+  }
+  if (mouseX > 642 && mouseX < 717 && mouseY > 615 && mouseY < 673) {
+    ballSpeed = 2;
+  }
+  if (mouseX > 717 && mouseX < 775 && mouseY > 615 && mouseY < 673) {
+    ballSpeed = 3;
+  }
+
+  if (mouseX > 429.5 && mouseX < 498 && mouseY > 700 && mouseY < 758) {
+    maxScore = 1;
+  }
+  if (mouseX > 498 && mouseX < 568 && mouseY > 700 && mouseY < 758) {
+    maxScore = 3;
+  }
+  if (mouseX > 568 && mouseX < 642 && mouseY > 700 && mouseY < 758) {
+    maxScore = 5;
+  }
+  if (mouseX > 642 && mouseX < 717 && mouseY > 700 && mouseY < 758) {
+    maxScore = 10;
+  }
+  if (mouseX > 717 && mouseX < 775 && mouseY > 700 && mouseY < 758) {
+    maxScore = 1000000000;
   }
 }
