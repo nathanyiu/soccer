@@ -3,10 +3,10 @@ void modeSelect() {
   //textFont(mode);
   fill(0, 0, 255);
   textSize(50);
-  text("Select a Mode:", 435, 100);
+  text("Select a Mode:", 320, 100);
   strokeWeight(2);
   stroke(0, 0, 255);
-  line(400, 120, 775, 120);
+  line(310, 120, 890, 120);
   stroke(255, 0, 0);
   fill(0);
   if (gameMode == 1) {
@@ -31,7 +31,7 @@ void modeSelect() {
   circle(350, 270, 20);
   circle(430, 230, 20);
   fill(255);
-  text("Match", 285, 380);
+  text("Match", 245, 380);
   if (gameMode == 2) {
     stroke(255);
   } else {
@@ -41,16 +41,16 @@ void modeSelect() {
   rect(700, 160, 300, 230, 20);
 
   fill(0, 0, 255);
-  text("Modification:", 460, 450);
+  text("Modification:", 368, 450);
   stroke(0, 0, 255);
-  line(435, 470, 765, 470);
+  line(358, 470, 838, 470);
   mod();
 }
 void mod() {
   fill(0);
-  textSize(30);
+  textSize(20);
   stroke(0);
-  text("Player Speed", 145, 560);
+  text("Player Speed", 105, 560);
   fill(255, 0, 0);
   circle(375, 550, 50);
   line1 = map(vx, -1, -11, 345, 315);
@@ -84,7 +84,7 @@ void mod() {
   text((int)abs(vx), 790, 560, 30);
 
   //ball speed
-  text("Ball Speed", 175, 650);
+  text("Ball Speed", 138, 650);
   pushMatrix();
   translate(0, 90);
   stroke(0);
@@ -108,24 +108,25 @@ void mod() {
   text(2, 665, 655);
   text(3, 740, 655);
   if (ballSpeed == 0.5) {
-    ballSpeedRect(429.5, 615);
+    ballSpeedRect(432, 615);
   } else if (ballSpeed == 1) {
     ballSpeedRect(498, 615);
   } else if (ballSpeed == 1.5) {
     ballSpeedRect(568, 615);
   } else if (ballSpeed == 2) {
-    ballSpeedRect(642, 615);
+    ballSpeedRect(644, 615);
   } else if (ballSpeed == 3) {
-    ballSpeedRect(717, 615);
+    ballSpeedRect(721, 615);
   }
 
   //max points
-  text("Points to Win", 140, 740);
+  text("Point(s) to Win", 77, 740);
   text(1,450,740);
   text(3,520,740);
   text(5,590,740);
   text(10,660,740);
-  text(inf,735,740);
+  circle(742.5,730,15);
+  circle(757.5,730,15);
   if (maxScore == 1) {
     ballSpeedRect(429.5, 700);
   } else if (maxScore == 3) {
@@ -133,9 +134,9 @@ void mod() {
   } else if (maxScore == 5) {
     ballSpeedRect(568, 700);
   } else if (maxScore == 10) {
-    ballSpeedRect(642, 700);
+    ballSpeedRect(645, 700);
   } else {
-    ballSpeedRect(717, 700);
+    ballSpeedRect(721, 700);
   }
   pushMatrix();
   translate(220, 700);
@@ -173,7 +174,34 @@ void mod() {
     mid1(1);
   }
   popMatrix();
+  if (maxScore > 10) {
+    fill(0);
+    text("Half Time Duration", 24, 830); 
+    circle(375,820,50);
+    fill(255);
+    circle(375,820,45);
+    fill(0);
+    circle(375,820,5);
+    stroke(0);
+    line(375,820,360,810);
+    line(375,820,385,820);
+    text(3,450,820);
+    text(
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 void top1(int a) {

@@ -26,11 +26,11 @@ int pauseBack, i;
 boolean pause, introBack;
 PImage soccer;
 float backballx, backbally, rotate;
-PFont start, mode;
+PFont font;
 int gameMode; //83
 float line1, line2, line3, line4;
 float moveCircle, ballCircle;
-int maxScore;
+int maxScore, timeLimit;
 float ballSpeed, bsReduce;
 int bs;
 String inf;
@@ -68,8 +68,6 @@ void setup() {
   backballx = 450;
   backbally = -100;
   rotate = 20;
-  //start = createFont("Calibri-Bold-48", 30);
-  //mode = createFont("Calibri-Bold-48", 50);
   gameMode = 0;
   line1 = 315;
   line2 = 325;
@@ -77,15 +75,16 @@ void setup() {
   line4 = 325;
   moveCircle = 600;
   ballCircle = 600;
-  maxScore = 3;
+  maxScore = 11;
   ballSpeed = 1;
   bsReduce = 0.9;
   inf = "\u221E";
-  //ballSpeed = 1;
-  //bsReduce = 0.8;
+  timeLimit = 0;
+  font = createFont("04B_30__.TTF",30);
 }
 void draw() {
   background(58, 201, 57);
+  textFont(font);
   if (Mode == Intro) {
     introBack();
     Intro();
@@ -307,18 +306,23 @@ void modeSelectClicked() {
   }
   if (mouseX > 429.5 && mouseX < 498 && mouseY > 615 && mouseY < 673) {
     ballSpeed = 0.5;
+    bsReduce = 0.9;
   }
   if (mouseX > 498 && mouseX < 568 && mouseY > 615 && mouseY < 673) {
     ballSpeed = 1;
+    bsReduce = 0.8;
   }
   if (mouseX > 568 && mouseX < 642 && mouseY > 615 && mouseY < 673) {
     ballSpeed = 1.5;
+    bsReduce = 0.65;
   }
   if (mouseX > 642 && mouseX < 717 && mouseY > 615 && mouseY < 673) {
     ballSpeed = 2;
+    bsReduce = 0.6;
   }
   if (mouseX > 717 && mouseX < 775 && mouseY > 615 && mouseY < 673) {
     ballSpeed = 3;
+    bsReduce = 0.5;
   }
 
   if (mouseX > 429.5 && mouseX < 498 && mouseY > 700 && mouseY < 758) {
