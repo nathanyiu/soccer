@@ -1,18 +1,35 @@
 void scoreboard(int teamA, int teamB) {
   noStroke();
-  rect(450, 0, 300, 190);
+  fill(80,80,80);
+  rect(230, 0, 740, 190);
   fill(0);
-  rect(460, 10, 130, 170);
-  rect(610, 10, 130, 170);
+  rect(240, 10, 130, 170);
+  rect(380, 10, 130, 170);
+  rect(830, 10, 130, 170);
+  rect(690, 10, 130, 170);
+  
+  rect(520,45,32.5,52.5);
+  rect(560,45,32.5,52.5);
+  rect(607.5,45,32.5,52.5);
+  rect(650,45,32.5,52.5);
+  fill(255);
+  circle(600,60,5);
+  circle(600,82.5,5);
   fill(255, 0, 0);
   stroke(255, 0, 0);
   strokeWeight(0);
-  if (scoreA > 9) {
-    scoreA %= 10; 
+  teamA = teamA % 10;
+  teamB = teamB % 10;
+  scoreA10 = scoreA/10;
+  scoreB10 = scoreB/10;
+  if (scoreA > 99) {
+    scoreA = 0; 
   }
-  if (scoreB > 9) {
-    scoreB %= 10; 
+  if (scoreB > 99) {
+    scoreB = 0; 
   }
+  pushMatrix();
+  translate(-80, 0);
   if (teamA == 0) {
     top(1);
     topL(1);
@@ -21,8 +38,7 @@ void scoreboard(int teamA, int teamB) {
     BottomR(1);
     topR(1);
     mid(0);
-  }
-  else if (scoreA == 1) {
+  } else if (teamA == 1) {
     top(0);
     topL(0);
     BottomL(0);
@@ -30,8 +46,7 @@ void scoreboard(int teamA, int teamB) {
     BottomR(1);
     topR(1);
     mid(0);
-  }
-  else if (scoreA == 2){
+  } else if (teamA == 2) {
     top(1);
     topL(0);
     BottomL(1);
@@ -39,8 +54,7 @@ void scoreboard(int teamA, int teamB) {
     BottomR(0);
     topR(1);
     mid(1);
-  }
-  else if (scoreA == 3){
+  } else if (teamA == 3) {
     top(1);
     topL(0);
     BottomL(0);
@@ -48,8 +62,7 @@ void scoreboard(int teamA, int teamB) {
     BottomR(1);
     topR(1);
     mid(1);
-  }
-  else if (scoreA == 4){
+  } else if (teamA == 4) {
     top(0);
     topL(1);
     BottomL(0);
@@ -57,8 +70,7 @@ void scoreboard(int teamA, int teamB) {
     BottomR(1);
     topR(1);
     mid(1);
-  }
-  else if (scoreA == 5){
+  } else if (teamA == 5) {
     top(1);
     topL(1);
     BottomL(0);
@@ -66,8 +78,7 @@ void scoreboard(int teamA, int teamB) {
     BottomR(1);
     topR(0);
     mid(1);
-  }
-  else if (scoreA == 6){
+  } else if (teamA == 6) {
     top(1);
     topL(1);
     BottomL(1);
@@ -75,8 +86,7 @@ void scoreboard(int teamA, int teamB) {
     BottomR(1);
     topR(0);
     mid(1);
-  }
-  else if (scoreA == 7){
+  } else if (teamA == 7) {
     top(1);
     topL(0);
     BottomL(0);
@@ -84,8 +94,7 @@ void scoreboard(int teamA, int teamB) {
     BottomR(1);
     topR(1);
     mid(0);
-  }
-  else if (scoreA == 8){
+  } else if (teamA == 8) {
     top(1);
     topL(1);
     BottomL(1);
@@ -93,100 +102,7 @@ void scoreboard(int teamA, int teamB) {
     BottomR(1);
     topR(1);
     mid(1);
-  }
-  else if (scoreA == 9){
-    top(1);
-    topL(1);
-    BottomL(0);
-    Bottom(1);
-    BottomR(1);
-    topR(1);
-    mid(1);
-  }
-  pushMatrix();
-  translate(150,0);
-  if (teamB == 0) {
-    top(1);
-    topL(1);
-    BottomL(1);
-    Bottom(1);
-    BottomR(1);
-    topR(1);
-    mid(0);
-  }
-  else if (teamB == 1) {
-    top(0);
-    topL(0);
-    BottomL(0);
-    Bottom(0);
-    BottomR(1);
-    topR(1);
-    mid(0);
-  }
-  else if (teamB == 2){
-    top(1);
-    topL(0);
-    BottomL(1);
-    Bottom(1);
-    BottomR(0);
-    topR(1);
-    mid(1);
-  }
-  else if (teamB == 3){
-    top(1);
-    topL(0);
-    BottomL(0);
-    Bottom(1);
-    BottomR(1);
-    topR(1);
-    mid(1);
-  }
-  else if (teamB == 4){
-    top(0);
-    topL(1);
-    BottomL(0);
-    Bottom(0);
-    BottomR(1);
-    topR(1);
-    mid(1);
-  }
-  else if (teamB == 5){
-    top(1);
-    topL(1);
-    BottomL(0);
-    Bottom(1);
-    BottomR(1);
-    topR(0);
-    mid(1);
-  }
-  else if (teamB == 6){
-    top(1);
-    topL(1);
-    BottomL(1);
-    Bottom(1);
-    BottomR(1);
-    topR(0);
-    mid(1);
-  }
-  else if (teamB == 7){
-    top(1);
-    topL(0);
-    BottomL(0);
-    Bottom(0);
-    BottomR(1);
-    topR(1);
-    mid(0);
-  }
-  else if (teamB == 8){
-    top(1);
-    topL(1);
-    BottomL(1);
-    Bottom(1);
-    BottomR(1);
-    topR(1);
-    mid(1);
-  }
-  else if (teamB == 9){
+  } else if (teamA == 9) {
     top(1);
     topL(1);
     BottomL(0);
@@ -196,6 +112,263 @@ void scoreboard(int teamA, int teamB) {
     mid(1);
   }
   popMatrix();
+  pushMatrix();
+  translate(370, 0);
+  if (teamB == 0) {
+    top(1);
+    topL(1);
+    BottomL(1);
+    Bottom(1);
+    BottomR(1);
+    topR(1);
+    mid(0);
+  } else if (teamB == 1) {
+    top(0);
+    topL(0);
+    BottomL(0);
+    Bottom(0);
+    BottomR(1);
+    topR(1);
+    mid(0);
+  } else if (teamB == 2) {
+    top(1);
+    topL(0);
+    BottomL(1);
+    Bottom(1);
+    BottomR(0);
+    topR(1);
+    mid(1);
+  } else if (teamB == 3) {
+    top(1);
+    topL(0);
+    BottomL(0);
+    Bottom(1);
+    BottomR(1);
+    topR(1);
+    mid(1);
+  } else if (teamB == 4) {
+    top(0);
+    topL(1);
+    BottomL(0);
+    Bottom(0);
+    BottomR(1);
+    topR(1);
+    mid(1);
+  } else if (teamB == 5) {
+    top(1);
+    topL(1);
+    BottomL(0);
+    Bottom(1);
+    BottomR(1);
+    topR(0);
+    mid(1);
+  } else if (teamB == 6) {
+    top(1);
+    topL(1);
+    BottomL(1);
+    Bottom(1);
+    BottomR(1);
+    topR(0);
+    mid(1);
+  } else if (teamB == 7) {
+    top(1);
+    topL(0);
+    BottomL(0);
+    Bottom(0);
+    BottomR(1);
+    topR(1);
+    mid(0);
+  } else if (teamB == 8) {
+    top(1);
+    topL(1);
+    BottomL(1);
+    Bottom(1);
+    BottomR(1);
+    topR(1);
+    mid(1);
+  } else if (teamB == 9) {
+    top(1);
+    topL(1);
+    BottomL(0);
+    Bottom(1);
+    BottomR(1);
+    topR(1);
+    mid(1);
+  }
+  popMatrix();
+
+  pushMatrix();
+  translate(-160, 0);
+  pushMatrix();
+  translate(-60, 0);
+  if (scoreA10 == 0) {
+    top(1);
+    topL(1);
+    BottomL(1);
+    Bottom(1);
+    BottomR(1);
+    topR(1);
+    mid(0);
+  } else if (scoreA10 == 1) {
+    top(0);
+    topL(0);
+    BottomL(0);
+    Bottom(0);
+    BottomR(1);
+    topR(1);
+    mid(0);
+  } else if (scoreA10 == 2) {
+    top(1);
+    topL(0);
+    BottomL(1);
+    Bottom(1);
+    BottomR(0);
+    topR(1);
+    mid(1);
+  } else if (scoreA10 == 3) {
+    top(1);
+    topL(0);
+    BottomL(0);
+    Bottom(1);
+    BottomR(1);
+    topR(1);
+    mid(1);
+  } else if (scoreA10 == 4) {
+    top(0);
+    topL(1);
+    BottomL(0);
+    Bottom(0);
+    BottomR(1);
+    topR(1);
+    mid(1);
+  } else if (scoreA10 == 5) {
+    top(1);
+    topL(1);
+    BottomL(0);
+    Bottom(1);
+    BottomR(1);
+    topR(0);
+    mid(1);
+  } else if (scoreA10 == 6) {
+    top(1);
+    topL(1);
+    BottomL(1);
+    Bottom(1);
+    BottomR(1);
+    topR(0);
+    mid(1);
+  } else if (scoreA10 == 7) {
+    top(1);
+    topL(0);
+    BottomL(0);
+    Bottom(0);
+    BottomR(1);
+    topR(1);
+    mid(0);
+  } else if (scoreA10 == 8) {
+    top(1);
+    topL(1);
+    BottomL(1);
+    Bottom(1);
+    BottomR(1);
+    topR(1);
+    mid(1);
+  } else if (scoreA10 == 9) {
+    top(1);
+    topL(1);
+    BottomL(0);
+    Bottom(1);
+    BottomR(1);
+    topR(1);
+    mid(1);
+  }
+  popMatrix();
+  pushMatrix();
+  translate(390, 0);
+  if (scoreB10 == 0) {
+    top(1);
+    topL(1);
+    BottomL(1);
+    Bottom(1);
+    BottomR(1);
+    topR(1);
+    mid(0);
+  } else if (scoreB10 == 1) {
+    top(0);
+    topL(0);
+    BottomL(0);
+    Bottom(0);
+    BottomR(1);
+    topR(1);
+    mid(0);
+  } else if (scoreB10 == 2) {
+    top(1);
+    topL(0);
+    BottomL(1);
+    Bottom(1);
+    BottomR(0);
+    topR(1);
+    mid(1);
+  } else if (scoreB10 == 3) {
+    top(1);
+    topL(0);
+    BottomL(0);
+    Bottom(1);
+    BottomR(1);
+    topR(1);
+    mid(1);
+  } else if (scoreB10 == 4) {
+    top(0);
+    topL(1);
+    BottomL(0);
+    Bottom(0);
+    BottomR(1);
+    topR(1);
+    mid(1);
+  } else if (scoreB10 == 5) {
+    top(1);
+    topL(1);
+    BottomL(0);
+    Bottom(1);
+    BottomR(1);
+    topR(0);
+    mid(1);
+  } else if (scoreB10 == 6) {
+    top(1);
+    topL(1);
+    BottomL(1);
+    Bottom(1);
+    BottomR(1);
+    topR(0);
+    mid(1);
+  } else if (scoreB10 == 7) {
+    top(1);
+    topL(0);
+    BottomL(0);
+    Bottom(0);
+    BottomR(1);
+    topR(1);
+    mid(0);
+  } else if (scoreB10 == 8) {
+    top(1);
+    topL(1);
+    BottomL(1);
+    Bottom(1);
+    BottomR(1);
+    topR(1);
+    mid(1);
+  } else if (scoreB10 == 9) {
+    top(1);
+    topL(1);
+    BottomL(0);
+    Bottom(1);
+    BottomR(1);
+    topR(1);
+    mid(1);
+  }
+  popMatrix();
+  popMatrix();
+  timer();
 }
 void top(int a) {
   if (a == 0) {

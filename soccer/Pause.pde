@@ -1,10 +1,13 @@
 void Pause() {
   stroke(0);
   strokeWeight(2);
-  while(i < pauseBack) {
+  if (i < pauseBack)  {
+    noStroke();
     fill(58,201,57,120);
     rect(0,0,1200,880);
     i++;
+  } if (Mode == Game) {
+    i = 0; 
   }
   if (dist(mouseX,mouseY,300,700)<62.5) {
     stroke(255);

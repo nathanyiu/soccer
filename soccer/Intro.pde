@@ -21,9 +21,12 @@ void Intro() {
 }
 void pressSpace() {
   stroke(2);
-  fill(255);
   textSize(30);
-  text("Press Space to Start", 475, 800);
+  fill(80,80,80,80);
+  text("Press Space to Start", 355, 805);
+  fill(255);
+  text("Press Space to Start", 350, 800);
+  
 }
 void title(int a) {
   noStroke();
@@ -37,12 +40,11 @@ void title(int a) {
   rect(380, 140, 40, 200);
   quad(380, 140, 380, 180, 310, 220, 300, 190);
   popMatrix();
-  //V
-  if (a == 0) {
-    rect(570, 350, 60, 30);
-  }
-  quad(570, 380, 600, 380, 570, 250, 540, 250);
-  quad(630, 380, 600, 380, 630, 250, 660, 250);
+  //v
+  //rect(570, 350, 60, 30);
+  quad(563,350,637,350,630,380,570,380);
+  quad(563, 350, 593, 350, 570, 250, 540, 250);
+  quad(637, 350, 607, 350, 630, 250, 660, 250);
   //S
   rect(100, 500, 125, 30);
   rect(100, 575, 125, 30);

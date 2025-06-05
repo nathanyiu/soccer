@@ -40,7 +40,11 @@ void Game() {
   circle(180, 540, 5);
   circle(1020, 540, 5);
   circle(600, 540, 25);
+  if (scoreA == maxScore || scoreB == maxScore || min10 == 9) {
+    Mode = GG; 
+  }
   noStroke();
+  scoreboard(scoreA, scoreB);
   player1A(player1x, player1y);
   player1B(player1Bx, player1By);
   player2A(player2x, player2y);
@@ -49,5 +53,5 @@ void Game() {
   playerMovement();
   playerCollision();
   ballMovement();
-  scoreboard(scoreA, scoreB);
+  
 }

@@ -45,7 +45,30 @@ void modeSelect() {
   stroke(0, 0, 255);
   line(358, 470, 838, 470);
   mod();
+  if(mouseX > 1000 && mouseX < 1150 && mouseY > 820 && mouseY < 870) {
+    stroke(255); 
+  } else {
+    stroke(255,0,0); 
+  }
+  fill(255,0,0);
+  rect(1000,820,150,50);
+  textSize(30);
+  fill(247,229,170);
+  text("PLAY!",1015,858);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 void mod() {
   fill(0);
   textSize(20);
@@ -102,13 +125,13 @@ void mod() {
   noFill();
   popMatrix();
   fill(0);
-  text("0.5", 440, 655);
+  text("0.5", 440.5, 655);
   text(1, 520, 655);
   text("1.5", 580, 655);
   text(2, 665, 655);
   text(3, 740, 655);
   if (ballSpeed == 0.5) {
-    ballSpeedRect(432, 615);
+    ballSpeedRect(435, 615);
   } else if (ballSpeed == 1) {
     ballSpeedRect(498, 615);
   } else if (ballSpeed == 1.5) {
@@ -121,14 +144,14 @@ void mod() {
 
   //max points
   text("Point(s) to Win", 77, 740);
-  text(1,450,740);
-  text(3,520,740);
-  text(5,590,740);
-  text(10,660,740);
-  circle(742.5,730,15);
-  circle(757.5,730,15);
+  text(1, 458, 740);
+  text(3, 520, 740);
+  text(5, 590, 740);
+  text(10, 660, 740);
+  circle(742.5, 730, 15);
+  circle(757.5, 730, 15);
   if (maxScore == 1) {
-    ballSpeedRect(429.5, 700);
+    ballSpeedRect(435, 700);
   } else if (maxScore == 3) {
     ballSpeedRect(498, 700);
   } else if (maxScore == 5) {
@@ -176,17 +199,32 @@ void mod() {
   popMatrix();
   if (maxScore > 10) {
     fill(0);
-    text("Half Time Duration", 24, 830); 
-    circle(375,820,50);
+    text("Half Time Duration", 24, 830);
+    //40
+    circle(375, 820, 50);
     fill(255);
-    circle(375,820,45);
+    circle(375, 820, 45);
     fill(0);
-    circle(375,820,5);
+    circle(375, 820, 5);
     stroke(0);
-    line(375,820,360,810);
-    line(375,820,385,820);
-    text(3,450,820);
-    text(
+    line(375, 820, 360, 810);
+    line(375, 820, 385, 820);
+    text(3, 455, 830);
+    text(5, 520, 830);
+    text(10, 583, 830);
+    text(30, 656, 830);
+    text(45, 733, 830);
+    if (timeLimit == 3) {
+      ballSpeedRect(435, 790);
+    } else if (timeLimit == 5) {
+      ballSpeedRect(498, 790);
+    } else if (timeLimit == 10) {
+      ballSpeedRect(568, 790);
+    } else if (timeLimit == 30) {
+      ballSpeedRect(645, 790);
+    } else {
+      ballSpeedRect(721, 790);
+    }
   }
 }
 

@@ -17,23 +17,26 @@ boolean OneBTouch2BTop, OneBTouch2BLeft, OneBTouch2BDown, OneBTouch2BRight;
 boolean OneBTouch2Top, OneBTouch2Left, OneBTouch2Down, OneBTouch2Right;
 boolean TwoTouch2BTop, TwoTouch2BLeft, TwoTouch2BDown, TwoTouch2BRight;
 float player1B, player2B;
-int Mode, Intro, Controls, Game, Pause, GG, modeSelect;
+int Mode, Intro, Controls, Game, Pause, GG, modeSelect,RGoal,BGoal,pen;
 float intBallx, intBally, ballDist;
 float intBallvx, intBallvy;
-int scoreA, scoreB;
+int scoreA, scoreA10, scoreB, scoreB10;
 int top, topL, BottomL, Bottom, BottomR, TopR, Mid;
 int pauseBack, i;
 boolean pause, introBack;
 PImage soccer;
 float backballx, backbally, rotate;
 PFont font;
-int gameMode; //83
+int gameMode; 
 float line1, line2, line3, line4;
 float moveCircle, ballCircle;
 int maxScore, timeLimit;
 float ballSpeed, bsReduce;
 int bs;
 String inf;
+int timer, min10, min, sec10, sec;
+int Rx,Bx;
+PImage screen;
 void setup() {
   size(1200, 880);
   player1x = width/4;
@@ -59,7 +62,10 @@ void setup() {
   GG = 3;
   Pause = 4;
   modeSelect = 5;
-  Mode = modeSelect;
+  RGoal = 6;
+  BGoal = 7;
+  pen = 8;
+  Mode = pen;
   scoreA = 0;
   scoreB = 0;
   pauseBack = 1;
@@ -75,20 +81,27 @@ void setup() {
   line4 = 325;
   moveCircle = 600;
   ballCircle = 600;
-  maxScore = 11;
+  maxScore = 1;
   ballSpeed = 1;
-  bsReduce = 0.9;
+  bsReduce = 0.8;
   inf = "\u221E";
   timeLimit = 0;
-  font = createFont("04B_30__.TTF",30);
+  font = createFont("04B_30__.TTF", 30);
+  timer = 0;
+  Rx = 1200;
+  Bx = -1200;
 }
 void draw() {
-  background(58, 201, 57);
+  //background(58, 201, 57);
   textFont(font);
   if (Mode == Intro) {
+    playerReset();
+    timerReset();
     introBack();
     Intro();
   } else if (Mode == Controls) {
+    playerReset();
+    timerReset();
     Controls();
   } else if (Mode == Game) {
     Game();
@@ -96,6 +109,12 @@ void draw() {
     GG();
   } else if (Mode == modeSelect) {
     modeSelect();
+  } else if (Mode == RGoal) {
+    RGoal();
+  } else if (Mode == BGoal) {
+    BGoal(); 
+  } else if (Mode == pen) {
+    pen(); 
   }
   if (Mode == Pause) {
     pause = true;
@@ -103,10 +122,6 @@ void draw() {
   } else {
     pause = false;
   }
-  if (pause == false) {
-    i = 0;
-  }
-  println(Mode);
 }
 void player1A(float player1x, float player1y) {
   pushMatrix();
@@ -161,7 +176,8 @@ void ball(float ballx, float bally) {
   translate(ballx, bally);
   stroke(0);
   fill(80, 80, 80);
-  circle(0, 0, 29);
+  circle(0, 0, 30);
+  image(soccer,-15,-15,30,30);
   popMatrix();
 }
 void keyPressed() {
@@ -203,8 +219,11 @@ void keyPressed() {
   }
   if (keyCode == TAB && pause == false && Mode == Game) {
     Mode = Pause;
+    pause = true;
   } else if (keyCode == TAB && pause == true && Mode == Pause) {
     Mode = Game;
+    pause = false;
+    i = 0;
   } else if (key == ' ' && Mode == Intro) {
     Mode = modeSelect;
   }
@@ -265,16 +284,25 @@ void ControlsClicked() {
 void GameClicked() {
   if (dist(mouseX, mouseY, 110, 50)< 25) {
     Mode = Pause;
+    pause = true;
   }
   if (dist(mouseX, mouseY, 50, 50)<25) {
     Mode = Intro;
   }
 }
 void GGClicked() {
+  if (mouseX > 400 && mouseX < 600 && mouseY > 700 && mouseY < 840) {
+    Mode = modeSelect; 
+  } else if ( mouseX > 650 && mouseX < 850 && mouseY > 700 && mouseY < 840) {
+    exit(); 
+  }
 }
+
 void PauseClicked() {
   if (dist(mouseX, mouseY, 600, 700)< 100) {
     Mode = Game;
+    pause = false;
+    i = 0;
   }
   if (dist(mouseX, mouseY, 300, 700)<62.5) {
     Mode = Intro;
@@ -340,4 +368,27 @@ void modeSelectClicked() {
   if (mouseX > 717 && mouseX < 775 && mouseY > 700 && mouseY < 758) {
     maxScore = 1000000000;
   }
+
+
+  if (mouseX > 429.5 && mouseX < 498 && mouseY > 790 && mouseY < 848) {
+    timeLimit = 3;
+  }
+  if (mouseX > 498 && mouseX < 568 && mouseY > 790 && mouseY < 848) {
+    timeLimit = 5;
+  }
+  if (mouseX > 568 && mouseX < 642 && mouseY > 790 && mouseY < 848) {
+    timeLimit = 10;
+  }
+  if (mouseX > 642 && mouseX < 717 && mouseY > 790 && mouseY < 848) {
+    timeLimit = 30;
+  }
+  if (mouseX > 717 && mouseX < 775 && mouseY > 790 && mouseY < 848) {
+    timeLimit = 45;
+  }
+
+  if (mouseX > 1000 && mouseX < 1150 && mouseY > 820 && mouseY < 870) {
+    Mode = Game;
+  }
 }
+
+  
