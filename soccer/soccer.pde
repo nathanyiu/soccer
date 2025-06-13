@@ -17,7 +17,7 @@ boolean OneBTouch2BTop, OneBTouch2BLeft, OneBTouch2BDown, OneBTouch2BRight;
 boolean OneBTouch2Top, OneBTouch2Left, OneBTouch2Down, OneBTouch2Right;
 boolean TwoTouch2BTop, TwoTouch2BLeft, TwoTouch2BDown, TwoTouch2BRight;
 float player1B, player2B;
-int Mode, Intro, Controls, Game, Pause, GG, modeSelect,RGoal,BGoal,pen;
+int Mode, Intro, Controls, Game, Pause, GG, modeSelect, RGoal, BGoal, pen;
 float intBallx, intBally, ballDist;
 float intBallvx, intBallvy;
 int scoreA, scoreA10, scoreB, scoreB10;
@@ -27,7 +27,7 @@ boolean pause, introBack;
 PImage soccer;
 float backballx, backbally, rotate;
 PFont font;
-int gameMode; 
+int gameMode;
 float line1, line2, line3, line4;
 float moveCircle, ballCircle;
 int maxScore, timeLimit;
@@ -35,8 +35,11 @@ float ballSpeed, bsReduce;
 int bs;
 String inf;
 int timer, min10, min, sec10, sec;
-int Rx,Bx;
+int Rx, Bx;
 PImage screen;
+PImage red, blue;
+int redMode, blueMode;
+boolean rPicked,bPicked;
 void setup() {
   size(1200, 880);
   player1x = width/4;
@@ -49,7 +52,7 @@ void setup() {
   player2By = 625;
   ballx = 600;
   bally = 540;
-  balld = 50;
+  balld = 30;
   vx = -5;
   vy = -5;
   ballvx = 0;
@@ -90,6 +93,12 @@ void setup() {
   timer = 0;
   Rx = 1200;
   Bx = -1200;
+  redMode = 0;
+  blueMode = 0;
+  red = loadImage("red.png");
+  blue = loadImage("blue.png");
+  rPicked = false;
+  bPicked = false;
 }
 void draw() {
   //background(58, 201, 57);
@@ -112,9 +121,9 @@ void draw() {
   } else if (Mode == RGoal) {
     RGoal();
   } else if (Mode == BGoal) {
-    BGoal(); 
+    BGoal();
   } else if (Mode == pen) {
-    pen(); 
+    pen();
   }
   if (Mode == Pause) {
     pause = true;
@@ -127,60 +136,74 @@ void player1A(float player1x, float player1y) {
   pushMatrix();
   translate(player1x, player1y);
   strokeWeight(1);
-  if (player1B == -1) {
-    stroke(255);
-  } else {
-    stroke(0);
-  }
-  strokeWeight(3);
+  noStroke();
   fill(255, 0, 0);
   circle(0, 0, 50);
+  if (redMode == 0) {
+    image(red, -25, -25);
+  }
   popMatrix();
 }
 void player1B(float player1x, float player1y) {
   pushMatrix();
   translate(player1x, player1y);
-  if (player1B == 1) {
-    stroke(255);
-  } else {
-    stroke(0);
-  }
   circle(0, 0, 50);
+  image(red, -25, -25);
   popMatrix();
 }
 void player2A(float player2x, float player2y) {
   pushMatrix();
   translate(player2x, player2y);
-  if (player2B == -1) {
-    stroke(255);
-  } else {
-    stroke(0);
-  }
   fill(0, 0, 255);
   circle(0, 0, 50);
+  if (blueMode == 0) {
+    image(blue, -25, -25);
+  }
   popMatrix();
 }
 void player2B (float player2x, float player2y) {
   pushMatrix();
   translate(player2x, player2y);
-  if (player2B == 1) {
-    stroke(255);
-  } else {
-    stroke(0);
-  }
   circle(0, 0, 50);
+  image(blue, -25, -25);
   popMatrix();
 }
-void ball(float ballx, float bally) {
+void ball(float ballx, float bally, float balld) {
   pushMatrix();
   translate(ballx, bally);
   stroke(0);
   fill(80, 80, 80);
-  circle(0, 0, 30);
-  image(soccer,-15,-15,30,30);
+  //circle(0, 0, balld);
+  image(soccer, -15, -15, balld, balld);
   popMatrix();
 }
 void keyPressed() {
+  if (Mode == Intro) {
+    IntroPressed();
+  } else if (Mode == Game) {
+    GamePressed();
+  } else if (Mode == Pause) {
+    PausePressed();
+  } else if (Mode == pen) {
+    penPressed();
+  }
+}
+void penPressed() {
+  if ((key == 'q'||key=='Q') && rPicked == false) {
+    rPicked = true;
+  } else if ((key == 'w'||key=='W') && rPicked == false) {
+    rPicked = true;
+  } else if ((key == 'e'||key=='E') && rPicked == false) {
+    rPicked = true;
+  } else if ((key == 'a'||key=='A') && rPicked == false) {
+    rPicked = true;
+  } else if ((key == 's'||key=='S') && rPicked == false) {
+    rPicked = true;
+  } else if ((key == 'd'||key=='D') && rPicked == false) {
+    rPicked = true;
+  }
+}
+void GamePressed() {
   if (key == 'w' || key == 'W') {
     wkey = true;
   }
@@ -217,14 +240,20 @@ void keyPressed() {
   if (key == 't') {
     scoreB++;
   }
-  if (keyCode == TAB && pause == false && Mode == Game) {
+  if (keyCode == TAB && pause == false) {
     Mode = Pause;
     pause = true;
-  } else if (keyCode == TAB && pause == true && Mode == Pause) {
+  }
+}
+void PausePressed() {
+  if (keyCode == TAB && pause == true && Mode == Pause) {
     Mode = Game;
     pause = false;
     i = 0;
-  } else if (key == ' ' && Mode == Intro) {
+  }
+}
+void IntroPressed() {
+  if (key == ' ' && Mode == Intro) {
     Mode = modeSelect;
   }
 }
@@ -273,9 +302,6 @@ void mouseDragged() {
   if (mouseX > 495 && mouseX < 705 && mouseY > 540 && mouseY < 560 && Mode == modeSelect) {
     moveCircle = mouseX;
   }
-  //if (mouseX > 495 && mouseX < 705 && mouseY > 630 && mouseY < 650 && Mode == modeSelect) {
-  //  ballCircle = mouseX;
-  //}
 }
 void IntroClicked() {
 }
@@ -292,9 +318,9 @@ void GameClicked() {
 }
 void GGClicked() {
   if (mouseX > 400 && mouseX < 600 && mouseY > 700 && mouseY < 840) {
-    Mode = modeSelect; 
+    Mode = modeSelect;
   } else if ( mouseX > 650 && mouseX < 850 && mouseY > 700 && mouseY < 840) {
-    exit(); 
+    exit();
   }
 }
 
@@ -390,5 +416,3 @@ void modeSelectClicked() {
     Mode = Game;
   }
 }
-
-  

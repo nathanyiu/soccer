@@ -49,7 +49,8 @@ void Game() {
   player1B(player1Bx, player1By);
   player2A(player2x, player2y);
   player2B(player2Bx, player2By);
-  ball(ballx, bally);
+  balld = 30;
+  ball(ballx, bally,balld);
   playerMovement();
   playerCollision();
   ballMovement();
