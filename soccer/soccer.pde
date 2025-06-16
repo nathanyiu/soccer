@@ -37,9 +37,13 @@ String inf;
 int timer, min10, min, sec10, sec;
 int Rx, Bx;
 PImage screen;
-PImage red, blue;
+PImage red,RTL;
+PImage blue;
 int redMode, blueMode;
 boolean rPicked,bPicked;
+int rOp,bOp;
+int[] rScore,bScore;
+int round;
 void setup() {
   size(1200, 880);
   player1x = width/4;
@@ -96,9 +100,13 @@ void setup() {
   redMode = 0;
   blueMode = 0;
   red = loadImage("red.png");
+  RTL = loadImage("redGoalieTL.png");
   blue = loadImage("blue.png");
   rPicked = false;
   bPicked = false;
+  rScore = new int[5];
+  bScore = new int[5];
+  round = 0;
 }
 void draw() {
   //background(58, 201, 57);
@@ -138,9 +146,11 @@ void player1A(float player1x, float player1y) {
   strokeWeight(1);
   noStroke();
   fill(255, 0, 0);
-  circle(0, 0, 50);
+  //circle(0, 0, 50);
   if (redMode == 0) {
     image(red, -25, -25);
+  } if (redMode == 1) {
+    image(RTL,-25,-25); 
   }
   popMatrix();
 }
@@ -191,16 +201,41 @@ void keyPressed() {
 void penPressed() {
   if ((key == 'q'||key=='Q') && rPicked == false) {
     rPicked = true;
+    rOp = 1;
   } else if ((key == 'w'||key=='W') && rPicked == false) {
     rPicked = true;
+    rOp = 2;
   } else if ((key == 'e'||key=='E') && rPicked == false) {
     rPicked = true;
+    rOp = 3;
   } else if ((key == 'a'||key=='A') && rPicked == false) {
     rPicked = true;
+    rOp = 4;
   } else if ((key == 's'||key=='S') && rPicked == false) {
     rPicked = true;
+    rOp = 5;
   } else if ((key == 'd'||key=='D') && rPicked == false) {
     rPicked = true;
+    rOp = 6;
+  }
+  if ((key == 'i'||key=='I') && bPicked == false) {
+    bPicked = true;
+    bOp = 1;
+  } else if ((key == 'o'||key=='O') && bPicked == false) {
+    bPicked = true;
+    bOp = 2;
+  } else if ((key == 'p'||key=='P') && bPicked == false) {
+    bPicked = true;
+    bOp = 3;
+  }  else if ((key == 'j'||key=='J') && bPicked == false) {
+    bPicked = true;
+    bOp = 4;
+  }  else if ((key == 'k'||key=='K') && bPicked == false) {
+    bPicked = true;
+    bOp = 5;
+  }  else if ((key == 'l'||key=='L') && bPicked == false) {
+    bPicked = true;
+    bOp =6;
   }
 }
 void GamePressed() {
