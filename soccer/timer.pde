@@ -1,6 +1,6 @@
 void timer() {
   if (Mode == Game) {
-    timer+=600;;
+    timer++;
   } else {
     timer+=0; 
   }

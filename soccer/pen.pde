@@ -6,7 +6,7 @@ void pen() {
 void animation() {
   player1x = 600;
   player1y = 425;
-  redMode = rOp ;
+  //redMode = rOp ;
   player1A(player1x,player1y);
 }
 void score() {
@@ -39,6 +39,7 @@ void score() {
     }
     circle(950 +25 * i +( 15 * (i+1)), 115, 30);
   }
+  
 }
 void environment() {
   stroke(255);

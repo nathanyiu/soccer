@@ -37,13 +37,14 @@ String inf;
 int timer, min10, min, sec10, sec;
 int Rx, Bx;
 PImage screen;
-PImage red,RTL;
-PImage blue;
+PImage red,RTL,RTM,RTR,RBL,RM,RBR;
+PImage blue,BTL,BTM,BTR,BBL,BM,BBR;
 int redMode, blueMode;
 boolean rPicked,bPicked;
 int rOp,bOp;
 int[] rScore,bScore;
 int round;
+boolean redKick;
 void setup() {
   size(1200, 880);
   player1x = width/4;
@@ -72,7 +73,7 @@ void setup() {
   RGoal = 6;
   BGoal = 7;
   pen = 8;
-  Mode = pen;
+  Mode = Intro;
   scoreA = 0;
   scoreB = 0;
   pauseBack = 1;
@@ -101,12 +102,18 @@ void setup() {
   blueMode = 0;
   red = loadImage("red.png");
   RTL = loadImage("redGoalieTL.png");
+  RTM = loadImage("redGoalieTop.png");
+  RTR = loadImage("redGoalieTR.png");
+  RBL = loadImage("RGBL.png");
+  RM = loadImage("redGoalieMid.png");
+  RBR = loadImage("RGBR.png");
   blue = loadImage("blue.png");
   rPicked = false;
   bPicked = false;
   rScore = new int[5];
   bScore = new int[5];
   round = 0;
+  redKick = false;
 }
 void draw() {
   //background(58, 201, 57);
@@ -125,6 +132,8 @@ void draw() {
   } else if (Mode == GG) {
     GG();
   } else if (Mode == modeSelect) {
+    timerReset();
+    playerReset();
     modeSelect();
   } else if (Mode == RGoal) {
     RGoal();
@@ -139,6 +148,7 @@ void draw() {
   } else {
     pause = false;
   }
+  println(scoreA, scoreB);
 }
 void player1A(float player1x, float player1y) {
   pushMatrix();
@@ -149,9 +159,21 @@ void player1A(float player1x, float player1y) {
   //circle(0, 0, 50);
   if (redMode == 0) {
     image(red, -25, -25);
-  } if (redMode == 1) {
-    image(RTL,-25,-25); 
   }
+  switch(redMode) {
+  case 1:
+    image(RTL,-25,-25); 
+  case 2:
+    image(RTM,-25,-25); 
+  case 3:
+    image(RTR,-25,-25); 
+  case 4:
+    image(RBL,-25,-25); 
+  case 5:
+    image(RM,-25,-25); 
+  case 6:
+    image(RBR,-25,-25); 
+  } 
   popMatrix();
 }
 void player1B(float player1x, float player1y) {
